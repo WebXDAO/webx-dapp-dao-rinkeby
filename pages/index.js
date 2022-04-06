@@ -6,6 +6,7 @@ import Proposal from "../components/Proposal";
 import Login from "../components/Login";
 import styles from "../styles/Home.module.css";
 import { AddressZero } from "@ethersproject/constants";
+import Hero from "../components/Hero";
 
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
   const [isVoting, setIsVoting] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
 
+  // Check if the user have minted an NFT to access to the DAO:
   useEffect(() => {
     if (!address) {
       return;
@@ -47,6 +49,7 @@ export default function Home() {
     checkBalance();
   }, [address, editionDrop]);
 
+  // If the user has claimed an NFT, get the proposals of the DAO:
   useEffect(() => {
     if (!hasClaimedNFT) {
       return;
@@ -63,6 +66,7 @@ export default function Home() {
     getAllProposals();
   }, [hasClaimedNFT, vote]);
 
+  // Check if the user already voted to one proposal:
   useEffect(() => {
     if (!hasClaimedNFT) {
       return;
@@ -74,8 +78,15 @@ export default function Home() {
 
     const checkIfUserHasVoted = async () => {
       try {
+        // Actually it only check the first proposal, we need to check all proposals
+        // and dispatch states
         const hasVoted = await vote.hasVoted(proposals[0].proposalId, address);
         setHasVoted(hasVoted);
+        // proposals.forEach(proposal => {
+        //   const hasVoted = await vote.hasVoted(proposal.proposalId, address);
+        //   setHasVoted( ... );
+        // })
+        
       } catch (error) {
         console.error("Failed to check if wallet has voted", error);
       }
@@ -160,15 +171,16 @@ export default function Home() {
     }
   };
   
-
   if (!address) {
-    return <Login />;
+    // return <Login />;
+    return <Hero/>
+
   }
 
   if (hasClaimedNFT) {
     return (
       <div className={styles.container}>
-        <h2>WebX DAO Active Proposals</h2>
+        <h1 className="text-2xl tracking-tight font-extrabold text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">WebX DAO Active Proposals</h1>
         <form onSubmit={handleFormSubmit}>
           {proposals.map((proposal) => (
             <Proposal
@@ -197,7 +209,8 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.container}>
+    <>
+    {/* <div className={styles.container}>
       <h1>Mint your free WebX DAO Membership NFT 💳</h1>
       <button
         className={styles.button}
@@ -206,6 +219,7 @@ export default function Home() {
       >
         {isClaiming ? "Minting..." : "Mint your NFT"}
       </button>
-    </div>
+    </div> */}
+    </>
   );
 }
