@@ -9,6 +9,7 @@ import { Animation } from "./Animation";
 const navigation = [
   { name: "Community", href: "https://webxdao.github.io" }, // Link to our landing page
   { name: "Github", href: "https://github.com/WebXDAO" }, // Link to our github
+  { name: "Join the Discord", href: "https://discord.com/invite/TSRwqx4K2v" }, // Link to our github
 ];
 
 const Hero = () => {
@@ -16,7 +17,7 @@ const Hero = () => {
 
   // bg-gray-800
   return (
-    <div className="relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
+    <div className="h-screen relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
       <div
         className="hidden sm:block sm:absolute sm:inset-0"
         aria-hidden="true"

@@ -105,8 +105,6 @@ export default function Home() {
     } finally {
       setIsClaiming(false);
     }
-
-    
   };
 
   const handleFormSubmit = async (e) => {
@@ -210,8 +208,8 @@ export default function Home() {
 
   return (
     <>
-    {/* <div className={styles.container}>
-      <h1>Mint your free WebX DAO Membership NFT 💳</h1>
+    <div className={styles.container}>
+      <h1 className="text-2xl tracking-tight font-extrabold text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">Mint your free WebX DAO Membership NFT 🧬</h1>
       <button
         className={styles.button}
         disabled={isClaiming}
@@ -219,7 +217,7 @@ export default function Home() {
       >
         {isClaiming ? "Minting..." : "Mint your NFT"}
       </button>
-    </div> */}
+    </div>
     </>
   );
 }
