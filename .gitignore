@@ -30,3 +30,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# .env contain private wallet key.
+# DO NOT COMMIT THIS FILE
+.env

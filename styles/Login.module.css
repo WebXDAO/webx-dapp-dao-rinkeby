@@ -1,0 +1,20 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgb(134, 239, 172), rgb(59, 130, 246), rgb(147, 51, 234))   
+}
+
+.button {
+    color: #726DFF;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-weight: 500;
+}
