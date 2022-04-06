@@ -26,3 +26,7 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## OpenSea Testnet Collection
+
+See the collection [here](https://testnets.opensea.io/collection/webx-dao).
