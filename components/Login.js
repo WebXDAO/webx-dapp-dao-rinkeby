@@ -6,6 +6,7 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.h1}>Welcome to WebX DAO</h1>
       <button className={styles.button} onClick={connectWithMetamask}>
         🧬 Sign in using MetaMask
       </button>

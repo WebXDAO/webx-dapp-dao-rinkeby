@@ -7,6 +7,10 @@
     background: linear-gradient(to right, rgb(134, 239, 172), rgb(59, 130, 246), rgb(147, 51, 234))   
 }
 
+.container > h1 {
+    color: white;
+}
+
 .button {
     color: #726DFF;
     background-color: white;

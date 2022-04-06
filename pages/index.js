@@ -168,7 +168,7 @@ export default function Home() {
   if (hasClaimedNFT) {
     return (
       <div className={styles.container}>
-        <h2>Active Proposals</h2>
+        <h2>WebX DAO Active Proposals</h2>
         <form onSubmit={handleFormSubmit}>
           {proposals.map((proposal) => (
             <Proposal
