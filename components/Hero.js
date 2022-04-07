@@ -18,36 +18,6 @@ const Hero = () => {
   // bg-gray-800
   return (
     <div className="h-screen relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900">
-      <div
-        className="hidden sm:block sm:absolute sm:inset-0"
-        aria-hidden="true"
-      >
-        <svg
-          className="absolute bottom-0 right-0 transform translate-x-1/2 mb-48 text-gray-400 lg:top-0 lg:mt-28 lg:mb-0 xl:transform-none xl:translate-x-0"
-          width={364}
-          height={384}
-          viewBox="0 0 364 384"
-          fill="none"
-        >
-          <defs>
-            <pattern
-              id="eab71dd9-9d7a-47bd-8044-256344ee00d0"
-              x={0}
-              y={0}
-              width={20}
-              height={20}
-              patternUnits="userSpaceOnUse"
-            >
-              <rect x={0} y={0} width={4} height={4} fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect
-            width={364}
-            height={384}
-            fill="url(#eab71dd9-9d7a-47bd-8044-256344ee00d0)"
-          />
-        </svg>
-      </div>
       <div className="relative pt-6 pb-16 sm:pb-24">
         <Popover>
           <nav
@@ -57,7 +27,7 @@ const Hero = () => {
             <div className="flex items-center flex-1">
               <div className="flex items-center justify-between w-full md:w-auto">
                 <a href="#">
-                  <span className="sr-only">Workflow</span>
+                  <span className="sr-only">WebX DAO</span>
                   <img className="h-8 w-auto sm:h-10" src="/logo.png" alt="" />
                 </a>
                 <div className="-mr-2 flex items-center md:hidden">
@@ -79,14 +49,6 @@ const Hero = () => {
                 ))}
               </div>
             </div>
-            {/* <div className="hidden md:flex">
-              <a
-                href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
-              >
-                Log in
-              </a>
-            </div> */}
           </nav>
 
           <Transition
@@ -107,8 +69,8 @@ const Hero = () => {
                   <div>
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                      alt=""
+                      src="/logo.png"
+                      alt="WebX DAO Logo"
                     />
                   </div>
                   <div className="-mr-2">
