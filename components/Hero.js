@@ -117,7 +117,7 @@ const Hero = () => {
                   <h1 className="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-5xl xl:text-6xl">
                     <span className="md:block">Join WebX DAO</span>{" "}
                     <span className="text-purple-400 md:block">
-                      Opensource Community
+                      Open Source Community
                     </span>
                   </h1>
                   <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
