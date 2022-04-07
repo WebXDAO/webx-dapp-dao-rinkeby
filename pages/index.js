@@ -1,4 +1,9 @@
-import { useAddress, useEditionDrop, useToken, useVote } from "@thirdweb-dev/react";
+import {
+  useAddress,
+  useEditionDrop,
+  useToken,
+  useVote,
+} from "@thirdweb-dev/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -7,7 +12,8 @@ import Login from "../components/Login";
 import styles from "../styles/Home.module.css";
 import { AddressZero } from "@ethersproject/constants";
 import Hero from "../components/Hero";
-
+import DashboardLayout from "../layout/DashboardLayout";
+import MemberList from "../components/MemberList";
 
 export default function Home() {
   const address = useAddress();
@@ -22,6 +28,7 @@ export default function Home() {
   const [isClaiming, setIsClaiming] = useState(false);
 
   const [proposals, setProposals] = useState([]);
+  const [memberAddresses, setMembersAddresses] = useState([]);
   const [isVoting, setIsVoting] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
 
@@ -86,13 +93,41 @@ export default function Home() {
         //   const hasVoted = await vote.hasVoted(proposal.proposalId, address);
         //   setHasVoted( ... );
         // })
-        
       } catch (error) {
         console.error("Failed to check if wallet has voted", error);
       }
     };
     checkIfUserHasVoted();
   }, [hasClaimedNFT, proposals, address, vote]);
+
+  // A fancy function to shorten someones wallet address, no need to show the whole thing.
+  const shortenAddress = (str) => {
+    return str.substring(0, 6) + "..." + str.substring(str.length - 4);
+  };
+
+  // This useEffect grabs all our the addresses of our members holding our NFT.
+  useEffect(() => {
+    if (!hasClaimedNFT) {
+      return;
+    }
+
+    const getAllAddresses = async () => {
+      try {
+        await editionDrop.history
+          .getAllClaimerAddresses("0")
+          .then((addresses) => {
+            console.log("🚀 Members addresses", addresses);
+            setMembersAddresses(addresses);
+          });
+      } catch (error) {
+        console.error("failed to get member list", error);
+      }
+    };
+    // Just like we did in the 7-airdrop-token.js file! Grab the users who hold our NFT
+    // with tokenId 0.
+
+    getAllAddresses();
+  }, [hasClaimedNFT, editionDrop]);
 
   const mintNft = async () => {
     setIsClaiming(true);
@@ -168,56 +203,64 @@ export default function Home() {
       setIsVoting(false);
     }
   };
-  
+
   if (!address) {
     // return <Login />;
-    return <Hero/>
-
+    return <Hero />;
   }
 
   if (hasClaimedNFT) {
     return (
-      <div className={styles.container}>
-        <h1 className="text-2xl tracking-tight font-extrabold text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">WebX DAO Active Proposals</h1>
-        <form onSubmit={handleFormSubmit}>
-          {proposals.map((proposal) => (
-            <Proposal
-              key={proposal.proposalId}
-              votes={proposal.votes}
-              description={proposal.description}
-              proposalId={proposal.proposalId}
-            />
-          ))}
-
-          <button
-            onClick={handleFormSubmit}
-            type="submit"
-            disabled={isVoting || hasVoted}
-            className={styles.button}
-          >
-            {isVoting
-              ? "Voting..."
-              : hasVoted
-              ? "You Already Voted"
-              : "Submit Votes"}
-          </button>
-        </form>
-      </div>
+      <DashboardLayout>
+        <div>
+          <h2 className="text-2xl tracking-tight font-extrabold text-gray-800 sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">
+            WebX DAO Active Proposals
+          </h2>
+          <form onSubmit={handleFormSubmit}>
+            {proposals.map((proposal) => (
+              <Proposal
+                key={proposal.proposalId}
+                votes={proposal.votes}
+                description={proposal.description}
+                proposalId={proposal.proposalId}
+              />
+            ))}
+            <button
+              onClick={handleFormSubmit}
+              type="submit"
+              disabled={isVoting || hasVoted}
+              className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-700 shadow-sm hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto"
+            >
+              {isVoting
+                ? "Voting..."
+                : hasVoted
+                ? "You Already Voted"
+                : "Submit Votes"}
+            </button>
+          </form>
+          <h2 className="text-2xl tracking-tight font-extrabold text-gray-800 sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">
+            WebX DAO Members
+          </h2>
+          <MemberList members={memberAddresses}></MemberList>
+        </div>
+      </DashboardLayout>
     );
   }
 
   return (
     <>
-    <div className={styles.container}>
-      <h1 className="text-2xl tracking-tight font-extrabold text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">Mint your free WebX DAO Membership NFT 🧬</h1>
-      <button
-        className={styles.button}
-        disabled={isClaiming}
-        onClick={() => mintNft()}
-      >
-        {isClaiming ? "Minting..." : "Mint your NFT"}
-      </button>
-    </div>
+      <div>
+        <h1 className="text-2xl tracking-tight font-extrabold text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">
+          Mint your free WebX DAO Membership NFT 🧬
+        </h1>
+        <button
+          className={styles.button}
+          disabled={isClaiming}
+          onClick={() => mintNft()}
+        >
+          {isClaiming ? "Minting..." : "Mint your NFT"}
+        </button>
+      </div>
     </>
   );
 }
