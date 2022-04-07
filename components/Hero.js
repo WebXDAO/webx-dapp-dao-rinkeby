@@ -17,7 +17,7 @@ const Hero = () => {
 
   // bg-gray-800
   return (
-    <div className="h-screen relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
+    <div className="h-screen relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900">
       <div
         className="hidden sm:block sm:absolute sm:inset-0"
         aria-hidden="true"
