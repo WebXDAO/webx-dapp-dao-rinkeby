@@ -249,18 +249,20 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <h1 className="text-2xl tracking-tight font-extrabold text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl">
-          Mint your free WebX DAO Membership NFT 🧬
-        </h1>
-        <button
-          className={styles.button}
-          disabled={isClaiming}
-          onClick={() => mintNft()}
-        >
-          {isClaiming ? "Minting..." : "Mint your NFT"}
-        </button>
-      </div>
+      <DashboardLayout>
+        <div>
+          <h1 className="text-2xl tracking-tight font-extrabold text-gray-800 sm:mt-5 sm:leading-none lg:mt-6 lg:text-3xl xl:text-4xl mb-10">
+            Mint your free WebX DAO Membership NFT 🧬
+          </h1>
+          <button
+            className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-700 shadow-sm hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto"
+            disabled={isClaiming}
+            onClick={() => mintNft()}
+          >
+            {isClaiming ? "Minting..." : "Mint your NFT"}
+          </button>
+        </div>
+      </DashboardLayout>
     </>
   );
 }
